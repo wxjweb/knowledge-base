@@ -127,3 +127,31 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+#Idea Files#
+*.iml
+*.ipr
+*.iws
+.idea/
+**/.idea/
+*.pyc
+*.diff
+src/smacsite/media
+DEBUG
+
+#Eclipse Files#
+*.pydevproject
+.project
+.metadata
+.mymetadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
