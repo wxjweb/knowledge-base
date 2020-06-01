@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>获取配置并写入文件 | 知识库</title>
+    <meta name="generator" content="VuePress 1.4.1">
+    
+    <meta name="description" content="知识库">
+    <link rel="preload" href="/assets/css/0.styles.4a921ed4.css" as="style"><link rel="preload" href="/assets/js/app.fcdfc17b.js" as="script"><link rel="preload" href="/assets/js/2.34dcbb0f.js" as="script"><link rel="preload" href="/assets/js/44.e1043a3f.js" as="script"><link rel="prefetch" href="/assets/js/10.384d37c0.js"><link rel="prefetch" href="/assets/js/11.c2047644.js"><link rel="prefetch" href="/assets/js/12.e7b64200.js"><link rel="prefetch" href="/assets/js/13.9ea16430.js"><link rel="prefetch" href="/assets/js/14.c3bf2b54.js"><link rel="prefetch" href="/assets/js/15.0dfd9334.js"><link rel="prefetch" href="/assets/js/16.b91fd800.js"><link rel="prefetch" href="/assets/js/17.4aed98d4.js"><link rel="prefetch" href="/assets/js/18.320aa1a1.js"><link rel="prefetch" href="/assets/js/19.d0e3e720.js"><link rel="prefetch" href="/assets/js/20.22886fec.js"><link rel="prefetch" href="/assets/js/21.6ca12f83.js"><link rel="prefetch" href="/assets/js/22.8089aa72.js"><link rel="prefetch" href="/assets/js/23.b2f2a657.js"><link rel="prefetch" href="/assets/js/24.a22100e7.js"><link rel="prefetch" href="/assets/js/25.64d38191.js"><link rel="prefetch" href="/assets/js/26.965200cc.js"><link rel="prefetch" href="/assets/js/27.3985d676.js"><link rel="prefetch" href="/assets/js/28.eade679b.js"><link rel="prefetch" href="/assets/js/29.0ebe210d.js"><link rel="prefetch" href="/assets/js/3.fa527f82.js"><link rel="prefetch" href="/assets/js/30.7868f72f.js"><link rel="prefetch" href="/assets/js/31.fde6c014.js"><link rel="prefetch" href="/assets/js/32.248e54b7.js"><link rel="prefetch" href="/assets/js/33.8f6fd3a3.js"><link rel="prefetch" href="/assets/js/34.5ec44f5c.js"><link rel="prefetch" href="/assets/js/35.467c1b36.js"><link rel="prefetch" href="/assets/js/36.af2bc8fb.js"><link rel="prefetch" href="/assets/js/37.41f46953.js"><link rel="prefetch" href="/assets/js/38.8963fe92.js"><link rel="prefetch" href="/assets/js/39.88c4d1b2.js"><link rel="prefetch" href="/assets/js/4.8aeecba0.js"><link rel="prefetch" href="/assets/js/40.88800fef.js"><link rel="prefetch" href="/assets/js/41.d936022c.js"><link rel="prefetch" href="/assets/js/42.2b3fd2fe.js"><link rel="prefetch" href="/assets/js/43.c6fffe7d.js"><link rel="prefetch" href="/assets/js/45.36bb9ff6.js"><link rel="prefetch" href="/assets/js/46.7904ed8e.js"><link rel="prefetch" href="/assets/js/47.f097057d.js"><link rel="prefetch" href="/assets/js/48.113d5c2f.js"><link rel="prefetch" href="/assets/js/49.59a0863a.js"><link rel="prefetch" href="/assets/js/5.ae45872e.js"><link rel="prefetch" href="/assets/js/6.7f48fbc1.js"><link rel="prefetch" href="/assets/js/7.e9e2a5c1.js"><link rel="prefetch" href="/assets/js/8.64463972.js"><link rel="prefetch" href="/assets/js/9.fc6a49da.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.4a921ed4.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">知识库</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/python/" class="nav-link">
+  python
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="其他" class="dropdown-title"><span class="title">其他</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/talk.html" class="nav-link">
+  talk
+</a></li><li class="dropdown-item"><!----> <a href="/extra/" class="nav-link">
+  other
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/wxjweb" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  FAQ
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/python/" class="nav-link">
+  python
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="其他" class="dropdown-title"><span class="title">其他</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/talk.html" class="nav-link">
+  talk
+</a></li><li class="dropdown-item"><!----> <a href="/extra/" class="nav-link">
+  other
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/wxjweb" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  FAQ
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>welcome</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/welcome/brief introduction.html" class="sidebar-link">brief introduction</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Python</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Django</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Linux</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Shell</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Docker</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Git和SVN</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Markdown</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>K-line index knowledge</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Tools</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>talk</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>other</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="获取配置并写入文件"><a href="#获取配置并写入文件" class="header-anchor">#</a> 获取配置并写入文件</h1> <div class="language-python extra-class"><pre class="language-python"><code>X<span class="token punctuation">:</span>\ba3\src\basite\config_frame\__init__<span class="token punctuation">.</span>py
+
+定义级联模板集：<span class="token string">'ba_tpl_set'</span>
+
+POLICY_SET_KEY <span class="token operator">=</span> <span class="token string">'security_policy_set'</span>
+ba_TPL_SET <span class="token operator">=</span> <span class="token string">'ba_tpl_set'</span>
+ROOT_MOC_TYPE <span class="token operator">=</span> <span class="token punctuation">(</span>POLICY_SET_KEY<span class="token punctuation">,</span> <span class="token string">'network_config_set'</span><span class="token punctuation">,</span> <span class="token string">'device_config_set'</span><span class="token punctuation">,</span> <span class="token string">'template_config_set'</span><span class="token punctuation">,</span> ba_TPL_SET<span class="token punctuation">)</span>
+
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>X<span class="token punctuation">:</span>\ba3\src\basite\schemas\network\ba_tpl_set<span class="token punctuation">.</span>json
+
+定义策略模板集schema并生成数据表t_config_ba_tpl_set
+
+<span class="token punctuation">{</span>
+    <span class="token string">&quot;$schema&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;http://json-schema.org/draft-04/schema#&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;id&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;http://jsonschema.net&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;object&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;properties&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">&quot;ba_tpl_set&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+            <span class="token string">&quot;type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;array&quot;</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;brief_description_cn&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;%%(name)%%(desc)%%(device/text)%%(parent)&quot;</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;brief_description_en&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;%(name)%(desc)%(device/text)%(parent)&quot;</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;neglected_attr_in_reference_table&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+                <span class="token string">&quot;sec_policy_tpl&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+            <span class="token string">&quot;items&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                <span class="token string">&quot;type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;object&quot;</span><span class="token punctuation">,</span>
+                <span class="token string">&quot;properties&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                    <span class="token string">&quot;name&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                        <span class="token string">&quot;type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;name&quot;</span><span class="token punctuation">,</span>
+                        <span class="token string">&quot;cn_name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;名称&quot;</span>
+                    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                    <span class="token string">&quot;desc&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                        <span class="token string">&quot;type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;desc&quot;</span><span class="token punctuation">,</span>
+                        <span class="token string">&quot;cn_name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;描述&quot;</span>
+                    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                    <span class="token string">&quot;parent&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                        <span class="token string">&quot;type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span>
+                        <span class="token string">&quot;minLength&quot;</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+                        <span class="token string">&quot;maxLength&quot;</span><span class="token punctuation">:</span> <span class="token number">63</span><span class="token punctuation">,</span>
+                        <span class="token string">&quot;value_translation_cn&quot;</span><span class="token punctuation">:</span><span class="token punctuation">{</span><span class="token string">&quot;any&quot;</span><span class="token punctuation">:</span><span class="token string">&quot;default&quot;</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+                        <span class="token string">&quot;cn_name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;父策略集&quot;</span>
+                    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                    <span class="token string">&quot;device&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                        <span class="token string">&quot;type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;array&quot;</span><span class="token punctuation">,</span>
+                        <span class="token string">&quot;items&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                            <span class="token string">&quot;type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;object&quot;</span><span class="token punctuation">,</span>
+                            <span class="token string">&quot;properties&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                                <span class="token string">&quot;text&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                                    <span class="token string">&quot;type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span>
+                                    <span class="token string">&quot;minLength&quot;</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+                                    <span class="token string">&quot;maxLength&quot;</span><span class="token punctuation">:</span> <span class="token number">127</span>
+                                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                                <span class="token string">&quot;value&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                                    <span class="token string">&quot;type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span>
+                                    <span class="token string">&quot;minLength&quot;</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+                                    <span class="token string">&quot;maxLength&quot;</span><span class="token punctuation">:</span> <span class="token number">127</span>
+                                <span class="token punctuation">}</span>
+                            <span class="token punctuation">}</span>
+                        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                        <span class="token string">&quot;cn_name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;关联设备&quot;</span>
+                    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                    <span class="token string">&quot;need_download&quot;</span><span class="token punctuation">:</span><span class="token punctuation">{</span>
+                        <span class="token string">&quot;type&quot;</span><span class="token punctuation">:</span><span class="token string">&quot;integer&quot;</span>
+                    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                    <span class="token string">&quot;sec_policy_tpl_list&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                        <span class="token string">&quot;type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;array&quot;</span><span class="token punctuation">,</span>
+                        <span class="token string">&quot;items&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+                            <span class="token string">&quot;type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;object&quot;</span><span class="token punctuation">,</span>
+                            <span class="token string">&quot;properties&quot;</span><span class="token punctuation">:</span>
+                            <span class="token punctuation">{</span>
+                                <span class="token string">&quot;rule_name&quot;</span><span class="token punctuation">:</span>
+                                <span class="token punctuation">{</span>
+                                    <span class="token string">&quot;type&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;string&quot;</span><span class="token punctuation">,</span>
+                                    <span class="token string">&quot;referenceType&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;sec_policy_tpl&quot;</span><span class="token punctuation">,</span>
+                                    <span class="token string">&quot;minLength&quot;</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span>
+                                    <span class="token string">&quot;maxLength&quot;</span><span class="token punctuation">:</span> <span class="token number">63</span>
+                                <span class="token punctuation">}</span>
+                            <span class="token punctuation">}</span>
+                        <span class="token punctuation">}</span>
+                    <span class="token punctuation">}</span>
+                <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                <span class="token string">&quot;required&quot;</span><span class="token punctuation">:</span>
+                <span class="token punctuation">[</span>
+                    <span class="token string">&quot;name&quot;</span>
+                <span class="token punctuation">]</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;can_rename&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;disable&quot;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>
+初始化默认模板：
+INSERT INTO t_config_ba_tpl_set <span class="token punctuation">(</span>user_id<span class="token punctuation">,</span> ne_id<span class="token punctuation">,</span> attached<span class="token punctuation">,</span> primary_key<span class="token punctuation">,</span> parent<span class="token punctuation">,</span> comment<span class="token punctuation">,</span> value<span class="token punctuation">)</span> VALUES
+<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">'any'</span><span class="token punctuation">,</span> <span class="token string">''</span><span class="token punctuation">,</span> <span class="token string">'默认级联策略模板'</span><span class="token punctuation">,</span>
+'<span class="token punctuation">{</span>
+  <span class="token string">&quot;desc&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;所有设备默认使用默认级联策略模板的配置。&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;any&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;device&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;parent&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span>
+  <span class="token string">&quot;need_download&quot;</span><span class="token punctuation">:</span> <span class="token number">0</span>
+<span class="token punctuation">}</span>'
+<span class="token punctuation">)</span> ON CONFLICT DO NOTHING<span class="token punctuation">;</span>
+
+
+当注册一个ba时，需要将ba信息写入这张表中
+
+ba_db<span class="token operator">=</span><span class="token comment"># SELECT * from t_config_ba_tpl_set;</span>
+ auto_id <span class="token operator">|</span> user_id <span class="token operator">|</span> ne_id <span class="token operator">|</span> attached <span class="token operator">|</span>       primary_key       <span class="token operator">|</span> parent <span class="token operator">|</span>                                                        value                                                        <span class="token operator">|</span>     comment      
+<span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">+</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">+</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">+</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">+</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">+</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">+</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">+</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span><span class="token operator">-</span>
+       <span class="token number">1</span> <span class="token operator">|</span>       <span class="token number">1</span> <span class="token operator">|</span>     <span class="token number">3</span> <span class="token operator">|</span>        <span class="token number">3</span> <span class="token operator">|</span> <span class="token builtin">any</span>                     <span class="token operator">|</span>        <span class="token operator">|</span> <span class="token punctuation">{</span><span class="token string">&quot;desc&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;所有设备默认使用默认级联策略模板的配置。&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;name&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;any&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;device&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token string">&quot;parent&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;need_download&quot;</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">}</span> <span class="token operator">|</span> 默认级联策略模板
+       <span class="token number">6</span> <span class="token operator">|</span>       <span class="token number">1</span> <span class="token operator">|</span>   <span class="token number">101</span> <span class="token operator">|</span>        <span class="token number">3</span> <span class="token operator">|</span> auto_created_for_ne<span class="token comment">#101 | any    | {&quot;desc&quot;: &quot;auto-loaded&quot;, &quot;name&quot;: &quot;auto_created_for_ne#103&quot;, &quot;parent&quot;: &quot;any&quot;, &quot;set_type&quot;: &quot;3&quot;, &quot;need_download&quot;: 1}    | test_comment</span>
+<span class="token punctuation">(</span><span class="token number">2</span> rows<span class="token punctuation">)</span>
+
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>X<span class="token punctuation">:</span>\ba3\src\basite\config_frame\parse<span class="token punctuation">.</span>py
+获取配置信息，实例化成moi：
+
+传参：<span class="token number">101</span><span class="token punctuation">,</span> <span class="token string">&quot;ba_tpl_set&quot;</span><span class="token punctuation">,</span> db<span class="token punctuation">,</span>attached<span class="token operator">=</span><span class="token number">3</span>
+
+<span class="token keyword">def</span> <span class="token function">parse_config_set_to_mois</span><span class="token punctuation">(</span>ne_id<span class="token punctuation">,</span> root_config_type<span class="token punctuation">,</span> db<span class="token punctuation">,</span> attached<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    ins <span class="token operator">=</span> DbToMoi<span class="token punctuation">(</span>db<span class="token punctuation">,</span> ne_id<span class="token punctuation">,</span> attached<span class="token operator">=</span>attached<span class="token punctuation">,</span> root_config_type<span class="token operator">=</span>root_config_type<span class="token punctuation">,</span> log<span class="token operator">=</span>logger<span class="token punctuation">)</span>
+    moi_data <span class="token operator">=</span> ins<span class="token punctuation">.</span>get_moi_dict<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token comment"># conflict: ins.conflict</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    moi_data = {'ba_tpl_set': {'auto_created_for_ne#101': &lt;config_frame.instance.Moi object at 0x7fb4465be350&gt;}, 'sec_policy_tpl': {u'celuemuban09': &lt;config_frame.instance.Moi object at 0x7fb4465be2d0&gt;}}
+    &quot;&quot;&quot;</span>
+    <span class="token keyword">return</span> moi_data
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>X<span class="token punctuation">:</span>\ba3\src\basite\config_frame\db2moi<span class="token punctuation">.</span>py
+
+<span class="token keyword">class</span> <span class="token class-name">DbToMoi</span><span class="token punctuation">(</span><span class="token builtin">object</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> db_handle<span class="token punctuation">,</span> ne_id<span class="token punctuation">,</span> attached<span class="token operator">=</span>CONFIG_ATTACHED_DEV<span class="token punctuation">,</span>
+                 root_config_type<span class="token operator">=</span>POLICY_SET_KEY<span class="token punctuation">,</span> log<span class="token operator">=</span>logger<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>db <span class="token operator">=</span> db_handle
+        self<span class="token punctuation">.</span>dev_ne_id <span class="token operator">=</span> ne_id
+        self<span class="token punctuation">.</span>attached <span class="token operator">=</span> attached
+        self<span class="token punctuation">.</span>root_config_type <span class="token operator">=</span> root_config_type
+        self<span class="token punctuation">.</span>conflict <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        self<span class="token punctuation">.</span>log <span class="token operator">=</span> log
+
+调用类DbToMoi并实例化
+
+self<span class="token punctuation">.</span>db <span class="token operator">=</span> db_handle
+self<span class="token punctuation">.</span>dev_ne_id <span class="token operator">=</span> <span class="token number">101</span>
+self<span class="token punctuation">.</span>attached <span class="token operator">=</span> <span class="token number">3</span>
+self<span class="token punctuation">.</span>root_config_type <span class="token operator">=</span> ba_tpl_set
+self<span class="token punctuation">.</span>conflict <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+self<span class="token punctuation">.</span>log <span class="token operator">=</span> log
+
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>调用类中的方法
+    <span class="token keyword">def</span> <span class="token function">get_moi_dict</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        get all related objects of the specific config set and its parent config set
+        and parse the object json value to moi
+        @return a dict of moi_dict, which key is object type and value is moi_dict
+        &quot;&quot;&quot;</span>
+        self<span class="token punctuation">.</span>log<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">'begin to load all mois from DB for ne_id [%s]'</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>dev_ne_id<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>root_config_type <span class="token keyword">not</span> <span class="token keyword">in</span> ROOT_MOC_TYPE<span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>log<span class="token punctuation">.</span>warn<span class="token punctuation">(</span><span class="token string">'unsupported config type %s'</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>root_config_type<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> <span class="token builtin">dict</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+        <span class="token comment"># get config set of the specific device</span>
+        root_table <span class="token operator">=</span> <span class="token string">&quot;t_config_%s&quot;</span> <span class="token operator">%</span> self<span class="token punctuation">.</span>root_config_type
+        primary_key <span class="token operator">=</span> get_policy_set_pk<span class="token punctuation">(</span>self<span class="token punctuation">.</span>db<span class="token punctuation">,</span> self<span class="token punctuation">.</span>dev_ne_id<span class="token punctuation">,</span> self<span class="token punctuation">.</span>attached<span class="token punctuation">,</span> table<span class="token operator">=</span>root_table<span class="token punctuation">,</span> config_type<span class="token operator">=</span>self<span class="token punctuation">.</span>root_config_type<span class="token punctuation">)</span>
+        objects_dict <span class="token operator">=</span> <span class="token builtin">dict</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">if</span> self<span class="token punctuation">.</span>root_config_type <span class="token operator">==</span> POLICY_SET_KEY <span class="token keyword">and</span> self<span class="token punctuation">.</span>attached <span class="token operator">==</span> CONFIG_ATTACHED_DEV<span class="token punctuation">:</span>
+            <span class="token keyword">for</span> obj_type <span class="token keyword">in</span> dev_manageable_config_type<span class="token punctuation">:</span>
+                objects_dict<span class="token punctuation">[</span>obj_type<span class="token punctuation">]</span> <span class="token operator">=</span> self<span class="token punctuation">.</span>add_all_objects_by_type<span class="token punctuation">(</span>obj_type<span class="token punctuation">,</span> self<span class="token punctuation">.</span>dev_ne_id<span class="token punctuation">,</span> self<span class="token punctuation">.</span>attached<span class="token punctuation">)</span>
+            all_obj_t <span class="token operator">=</span> get_dev_ref_set_relation<span class="token punctuation">(</span>self<span class="token punctuation">.</span>db<span class="token punctuation">,</span> self<span class="token punctuation">.</span>dev_ne_id<span class="token punctuation">)</span>
+            <span class="token keyword">for</span> row <span class="token keyword">in</span> all_obj_t<span class="token punctuation">:</span>
+                self<span class="token punctuation">.</span>add_object_to_type_dict<span class="token punctuation">(</span>row<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> row<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> row<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> row<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>dev_ne_id<span class="token punctuation">,</span> objects_dict<span class="token punctuation">,</span> config_type<span class="token operator">=</span>self<span class="token punctuation">.</span>root_config_type<span class="token punctuation">)</span>
+            _<span class="token punctuation">,</span> _<span class="token punctuation">,</span> primary_key <span class="token operator">=</span> get_parent_from_db<span class="token punctuation">(</span>self<span class="token punctuation">.</span>db<span class="token punctuation">,</span> root_table<span class="token punctuation">,</span> primary_key<span class="token punctuation">)</span>
+        all_obj_dict_by_type <span class="token operator">=</span> self<span class="token punctuation">.</span>get_all_objects_in_chain<span class="token punctuation">(</span>root_table<span class="token punctuation">,</span> primary_key<span class="token punctuation">,</span> objects_dict<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>log<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">'obj type count: %d'</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>all_obj_dict_by_type<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'obj type count: %d'</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>all_obj_dict_by_type<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        all_moi <span class="token operator">=</span> <span class="token builtin">dict</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> obj_type<span class="token punctuation">,</span> one_type_items <span class="token keyword">in</span> all_obj_dict_by_type<span class="token punctuation">.</span>iteritems<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token triple-quoted-string string">&quot;&quot;&quot;
+            obj_type = sec_policy_tpl
+            one_type_items = [[{u'src_addr': [{u'ip': u'5.5.5.5', u'mask': u'', u'addr_type': u'host'}], u'name': u'celuemuban09', u'tpl_from': u'local', u'service_item': [{u'text': u'DHCP', u'type': u'predef', u'value': u'DHCP'}], u'action': u'permit', u'dst_addr': [{u'ip': u'6.6.6.6', u'mask': u'', u'addr_type': u'host'}], u'desc': u''}, 101, 3]]
+
+            &quot;&quot;&quot;</span>
+            moc <span class="token operator">=</span> moc_container<span class="token punctuation">.</span>all_mocs<span class="token punctuation">[</span>obj_type<span class="token punctuation">]</span>
+            <span class="token triple-quoted-string string">&quot;&quot;&quot;
+            moc = &lt;config_frame.schema.Moc object at 0x7fb4489b7110&gt;
+            &quot;&quot;&quot;</span>
+            self<span class="token punctuation">.</span>log<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">&quot;obj_type=[%s]&quot;</span><span class="token punctuation">,</span> obj_type<span class="token punctuation">)</span>
+            all_moi<span class="token punctuation">[</span>obj_type<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token builtin">dict</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">for</span> item <span class="token keyword">in</span> one_type_items<span class="token punctuation">:</span>
+                <span class="token comment"># (value, ne_id, attached)</span>
+                <span class="token keyword">if</span> moc<span class="token punctuation">.</span>name <span class="token operator">==</span> <span class="token string">'sec_policy'</span><span class="token punctuation">:</span>
+                    sort_vlan_list<span class="token punctuation">(</span>item<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+                one_moi <span class="token operator">=</span> parse_one_moi<span class="token punctuation">(</span>moc<span class="token punctuation">,</span> item<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> item<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> item<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> log<span class="token operator">=</span>self<span class="token punctuation">.</span>log<span class="token punctuation">)</span>
+                primary_key <span class="token operator">=</span> one_moi<span class="token punctuation">.</span>get_primary_key<span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token triple-quoted-string string">&quot;&quot;&quot;
+                one_moi = 101_3_&lt;sec_policy_tpl&gt;_&lt;celuemuban09&gt;
+                primary_key = celuemuban09
+                &quot;&quot;&quot;</span>
+                <span class="token comment"># self.log.debug(&quot;moi:%s&quot;, one_moi)</span>
+                all_moi<span class="token punctuation">[</span>obj_type<span class="token punctuation">]</span><span class="token punctuation">[</span>primary_key<span class="token punctuation">]</span> <span class="token operator">=</span> one_moi
+                <span class="token triple-quoted-string string">&quot;&quot;&quot;
+                all_moi = {'sec_policy_tpl': {u'celuemuban09': &lt;config_frame.instance.Moi object at 0x7fb4465be2d0&gt;}}
+                &quot;&quot;&quot;</span>
+
+        policy_set_data <span class="token operator">=</span> build_policy_set_data<span class="token punctuation">(</span>self<span class="token punctuation">.</span>dev_ne_id<span class="token punctuation">,</span>
+                                                all_moi<span class="token punctuation">,</span>
+                                                config_type<span class="token operator">=</span>self<span class="token punctuation">.</span>root_config_type<span class="token punctuation">)</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        policy_set_data = {'need_download': 1, u'sec_policy_tpl_list': [{u'rule_name': u'celuemuban09'}], 'name': 'auto_created_for_ne#101', 'desc': 'auto-loaded'}
+        &quot;&quot;&quot;</span>
+        <span class="token comment"># self.log.info(policy_set_data)</span>
+        policy_set_key <span class="token operator">=</span> self<span class="token punctuation">.</span>root_config_type
+        policy_set_moc <span class="token operator">=</span> moc_container<span class="token punctuation">.</span>all_mocs<span class="token punctuation">[</span>policy_set_key<span class="token punctuation">]</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        policy_set_moc&lt;config_frame.schema.Moc object at 0x7fb448a6cdd0&gt;
+        &quot;&quot;&quot;</span>
+        all_moi<span class="token punctuation">[</span>policy_set_key<span class="token punctuation">]</span> <span class="token operator">=</span> item_list_to_moi_dict<span class="token punctuation">(</span>policy_set_moc<span class="token punctuation">,</span>
+                                                        <span class="token punctuation">[</span>policy_set_data<span class="token punctuation">]</span><span class="token punctuation">,</span>
+                                                        self<span class="token punctuation">.</span>dev_ne_id<span class="token punctuation">,</span>
+                                                        log<span class="token operator">=</span>self<span class="token punctuation">.</span>log<span class="token punctuation">,</span>
+                                                        config_type<span class="token operator">=</span>self<span class="token punctuation">.</span>root_config_type<span class="token punctuation">)</span>
+
+        print_moi_dict<span class="token punctuation">(</span>all_moi<span class="token punctuation">,</span> self<span class="token punctuation">.</span>log<span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>log<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">'end of load all mois from DB for ne_id:%s'</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>dev_ne_id<span class="token punctuation">)</span>
+        <span class="token keyword">return</span> all_moi
+
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>X<span class="token punctuation">:</span>\ba3\src\basite\config_frame\db_operate<span class="token punctuation">.</span>py
+
+获取策略集主键：
+
+<span class="token keyword">def</span> <span class="token function">get_policy_set_pk</span><span class="token punctuation">(</span>db<span class="token punctuation">,</span> ne_id<span class="token punctuation">,</span> attached<span class="token punctuation">,</span> table<span class="token operator">=</span>T_POLICY_SET<span class="token punctuation">,</span> config_type<span class="token operator">=</span>POLICY_SET_KEY<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> config_type <span class="token operator">==</span> ba_TPL_SET<span class="token punctuation">:</span>
+        sql <span class="token operator">=</span> <span class="token string">&quot;SELECT primary_key FROM %s WHERE ne_id='%s' AND attached=%d;&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>table<span class="token punctuation">,</span> <span class="token string">'101'</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        sql <span class="token operator">=</span> <span class="token string">&quot;SELECT primary_key FROM %s WHERE ne_id=%d AND attached=%d;&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>table<span class="token punctuation">,</span> ne_id<span class="token punctuation">,</span> attached<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> db_get_one_column<span class="token punctuation">(</span>db<span class="token punctuation">,</span> sql<span class="token punctuation">)</span>
+
+sql <span class="token operator">=</span> SELECT primary_key FROM t_config_ba_tpl_set WHERE ne_id<span class="token operator">=</span><span class="token string">'101'</span> AND attached<span class="token operator">=</span><span class="token number">3</span><span class="token punctuation">;</span>
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>X<span class="token punctuation">:</span>\ba3\src\basite\config_frame\db2moi<span class="token punctuation">.</span>py
+
+
+    <span class="token keyword">def</span> <span class="token function">get_all_objects_in_chain</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> table<span class="token punctuation">,</span> primary_key<span class="token punctuation">,</span> objects_dict<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        table = t_config_ba_tpl_set
+        primary_key = auto_created_for_ne#101
+        objects_dict = {}
+        &quot;&quot;&quot;</span>
+
+        row <span class="token operator">=</span> get_parent_from_db<span class="token punctuation">(</span>self<span class="token punctuation">.</span>db<span class="token punctuation">,</span> table<span class="token punctuation">,</span> primary_key<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> row <span class="token keyword">is</span> <span class="token boolean">None</span><span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>log<span class="token punctuation">.</span>warn<span class="token punctuation">(</span><span class="token string">'config named %s is None'</span><span class="token punctuation">,</span> primary_key<span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">'config named %s is None'</span> <span class="token operator">%</span> primary_key<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> objects_dict
+
+        ne_id<span class="token punctuation">,</span> attached<span class="token punctuation">,</span> parent_pk <span class="token operator">=</span> row
+        self<span class="token punctuation">.</span>log<span class="token punctuation">.</span>info<span class="token punctuation">(</span><span class="token string">'ne_id:%d, attached:%d, pk:%s, parent:%s'</span><span class="token punctuation">,</span> ne_id<span class="token punctuation">,</span> attached<span class="token punctuation">,</span> primary_key<span class="token punctuation">,</span> parent_pk<span class="token punctuation">)</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        ne_id:101, attached:3, pk:auto_created_for_ne#101, parent:any
+        &quot;&quot;&quot;</span>
+        data_dict_by_type <span class="token operator">=</span> <span class="token builtin">dict</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        root_obj <span class="token operator">=</span> baObj<span class="token punctuation">(</span>ne_id<span class="token punctuation">,</span> attached<span class="token punctuation">,</span> primary_key<span class="token punctuation">,</span> self<span class="token punctuation">.</span>root_config_type<span class="token punctuation">)</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        root_obj 101_3_&lt;ba_tpl_set&gt;_&lt;auto_created_for_ne#101&gt;
+        &quot;&quot;&quot;</span>
+        all_obj_in_set <span class="token operator">=</span> obj_relation_get_reverse<span class="token punctuation">(</span>self<span class="token punctuation">.</span>db<span class="token punctuation">,</span> root_obj<span class="token punctuation">,</span> recursive<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+
+        <span class="token keyword">for</span> row <span class="token keyword">in</span> all_obj_in_set<span class="token punctuation">:</span>
+            <span class="token comment"># row = (ne_id, attached, primary_key, objects_type)</span>
+            <span class="token triple-quoted-string string">&quot;&quot;&quot;
+            ne_id = 101
+            attached = 3
+            primary_key = celuemuban09
+            objects_type = sec_policy_tpl
+            self.dev_ne_id = 101
+            &quot;&quot;&quot;</span>
+            self<span class="token punctuation">.</span>add_object_to_type_dict<span class="token punctuation">(</span>row<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> row<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> row<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> row<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> self<span class="token punctuation">.</span>dev_ne_id<span class="token punctuation">,</span> data_dict_by_type<span class="token punctuation">,</span> config_type<span class="token operator">=</span>self<span class="token punctuation">.</span>root_config_type<span class="token punctuation">)</span>
+
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        data_dict_by_type = {'sec_policy_tpl': [[{u'src_addr': [{u'ip': u'5.5.5.5', u'mask': u'', u'addr_type': u'host'}], u'name': u'celuemuban09', u'tpl_from': u'local', u'service_item': [{u'text': u'DHCP', u'type': u'predef', u'value': u'DHCP'}], u'action': u'permit', u'dst_addr': [{u'ip': u'6.6.6.6', u'mask': u'', u'addr_type': u'host'}], u'desc': u''}, 101, 3]]}
+
+        &quot;&quot;&quot;</span>
+        self<span class="token punctuation">.</span>modify_sec_policy_pri<span class="token punctuation">(</span>objects_dict<span class="token punctuation">,</span> data_dict_by_type<span class="token punctuation">)</span>
+        data_dict_after_add <span class="token operator">=</span> self<span class="token punctuation">.</span>merge_object_dict_by_type<span class="token punctuation">(</span>objects_dict<span class="token punctuation">,</span> data_dict_by_type<span class="token punctuation">)</span>
+
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;合并后的值++++++++++&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>data_dict_after_add<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> parent_pk<span class="token punctuation">:</span>
+            <span class="token keyword">return</span> self<span class="token punctuation">.</span>get_all_objects_in_chain<span class="token punctuation">(</span>table<span class="token punctuation">,</span> parent_pk<span class="token punctuation">,</span> data_dict_after_add<span class="token punctuation">)</span>
+            <span class="token triple-quoted-string string">&quot;&quot;&quot;
+            parent_pk有值，则递归调用查询数据库
+            t_config_ba_tpl_set
+            any
+
+            SELECT ne_id,attached,value-&gt;&gt;'parent' FROM t_config_ba_tpl_set WHERE primary_key='any';
+            ne_id:3, attached:3, pk:any, parent:
+            root_obj 3_3_&lt;ba_tpl_set&gt;_&lt;any&gt;
+
+            WITH RECURSIVE q AS (SELECT ne_id, attached, primary_key, objects_type FROM t_config_objects_relations WHERE (cited_ne_id=3 AND cited_attached=3 AND cited_primary_key='any' AND cited_objects_type='ba_tpl_set') UNION SELECT m.ne_id, m.attached, m.primary_key, m.objects_type FROM t_config_objects_relations m JOIN q ON m.cited_ne_id = q.ne_id AND m.cited_attached = q.attached AND m.cited_primary_key = q.primary_key AND m.cited_objects_type = q.objects_type)             SELECT ne_id, attached, primary_key, objects_type FROM q
+
+             ne_id | attached | primary_key | objects_type 
+            -------+----------+-------------+--------------
+            (0 rows)
+            关系表没有引用关系了，表示已查询到最顶端，查询完毕
+            &quot;&quot;&quot;</span>
+
+        <span class="token keyword">return</span> data_dict_after_add
+
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>
+<span class="token keyword">def</span> <span class="token function">get_parent_from_db</span><span class="token punctuation">(</span>db<span class="token punctuation">,</span> table<span class="token punctuation">,</span> pk<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    sql <span class="token operator">=</span> <span class="token string">&quot;SELECT ne_id,attached,value-&gt;&gt;'parent' FROM &quot;</span> <span class="token operator">+</span> table <span class="token operator">+</span> <span class="token string">&quot; WHERE primary_key='%s';&quot;</span> <span class="token operator">%</span> pk
+    <span class="token keyword">return</span> db_get_one_row<span class="token punctuation">(</span>db<span class="token punctuation">,</span> sql<span class="token punctuation">)</span>
+
+sql <span class="token operator">=</span> SELECT ne_id<span class="token punctuation">,</span>attached<span class="token punctuation">,</span>value<span class="token operator">-</span><span class="token operator">&gt;&gt;</span><span class="token string">'parent'</span> FROM t_config_ba_tpl_set WHERE primary_key<span class="token operator">=</span><span class="token string">'auto_created_for_ne#101'</span><span class="token punctuation">;</span>
+
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>X<span class="token punctuation">:</span>\ba3\src\basite\config_frame\objects_relation<span class="token punctuation">.</span>py
+循环获取引用关系
+
+<span class="token keyword">def</span> <span class="token function">obj_relation_get_reverse</span><span class="token punctuation">(</span>db<span class="token punctuation">,</span> cited_obj<span class="token punctuation">,</span> recursive<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot; Search all the children objects of specific object.
+    @param db: the db handle
+    @param cited_obj: a instance of baObj
+    @param recursive: if true, get recursive relations,
+                       else get direct relations, e.g:
+       recursive = True (A-&gt;B, B-&gt;C, children relations object of C is A and B)
+       recursive = False (A-&gt;B, B-&gt;C, children relations object of C is only B)
+    @return: list (ne_id, attached, primary_key, objects_type)
+    &quot;&quot;&quot;</span>
+    <span class="token keyword">if</span> <span class="token keyword">not</span> recursive<span class="token punctuation">:</span>
+        read_sql <span class="token operator">=</span> <span class="token string">&quot;SELECT ne_id, attached, primary_key, objects_type &quot;</span> \
+                   <span class="token string">&quot;FROM t_config_objects_relations &quot;</span> \
+                   <span class="token string">&quot;WHERE (cited_ne_id=%d AND cited_attached=%d AND &quot;</span> \
+                   <span class="token string">&quot;cited_primary_key='%s' AND cited_objects_type='%s');&quot;</span> \
+                   <span class="token operator">%</span> <span class="token punctuation">(</span>cited_obj<span class="token punctuation">.</span>neid<span class="token punctuation">,</span> cited_obj<span class="token punctuation">.</span>attached<span class="token punctuation">,</span>
+                      cited_obj<span class="token punctuation">.</span>primary_key<span class="token punctuation">,</span> cited_obj<span class="token punctuation">.</span>obj_type<span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        read_sql <span class="token operator">=</span> <span class="token string">&quot;WITH RECURSIVE q AS (&quot;</span> \
+                   <span class="token string">&quot;SELECT ne_id, attached, primary_key, objects_type &quot;</span> \
+                   <span class="token string">&quot;FROM t_config_objects_relations &quot;</span> \
+                   <span class="token string">&quot;WHERE (cited_ne_id=%d AND cited_attached=%d AND &quot;</span> \
+                   <span class="token string">&quot;cited_primary_key='%s' AND cited_objects_type='%s') &quot;</span>\
+                   <span class="token string">&quot;UNION SELECT m.ne_id, m.attached, m.primary_key, &quot;</span> \
+                   <span class="token string">&quot;m.objects_type FROM t_config_objects_relations m &quot;</span>\
+                   <span class="token string">&quot;JOIN q ON m.cited_ne_id = q.ne_id AND &quot;</span> \
+                   <span class="token string">&quot;m.cited_attached = q.attached AND &quot;</span> \
+                   <span class="token string">&quot;m.cited_primary_key = q.primary_key AND &quot;</span> \
+                   <span class="token string">&quot;m.cited_objects_type = q.objects_type) \n&quot;</span> \
+                   <span class="token string">&quot;SELECT ne_id, attached, primary_key, objects_type FROM q&quot;</span> \
+                    <span class="token operator">%</span> <span class="token punctuation">(</span>cited_obj<span class="token punctuation">.</span>neid<span class="token punctuation">,</span> cited_obj<span class="token punctuation">.</span>attached<span class="token punctuation">,</span>
+                       cited_obj<span class="token punctuation">.</span>primary_key<span class="token punctuation">,</span> cited_obj<span class="token punctuation">.</span>obj_type<span class="token punctuation">)</span>
+    db<span class="token punctuation">.</span>logger<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">&quot;[%s]&quot;</span> <span class="token operator">%</span> read_sql<span class="token punctuation">)</span>
+    data <span class="token operator">=</span> db<span class="token punctuation">.</span>execute_read<span class="token punctuation">(</span>read_sql<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> data
+
+read_sql <span class="token operator">=</span> WITH RECURSIVE q AS <span class="token punctuation">(</span>SELECT ne_id<span class="token punctuation">,</span> attached<span class="token punctuation">,</span> primary_key<span class="token punctuation">,</span> objects_type FROM t_config_objects_relations WHERE <span class="token punctuation">(</span>cited_ne_id<span class="token operator">=</span><span class="token number">101</span> AND cited_attached<span class="token operator">=</span><span class="token number">3</span> AND cited_primary_key<span class="token operator">=</span><span class="token string">'auto_created_for_ne#101'</span> AND cited_objects_type<span class="token operator">=</span><span class="token string">'ba_tpl_set'</span><span class="token punctuation">)</span> UNION SELECT m<span class="token punctuation">.</span>ne_id<span class="token punctuation">,</span> m<span class="token punctuation">.</span>attached<span class="token punctuation">,</span> m<span class="token punctuation">.</span>primary_key<span class="token punctuation">,</span> m<span class="token punctuation">.</span>objects_type FROM t_config_objects_relations m JOIN q ON m<span class="token punctuation">.</span>cited_ne_id <span class="token operator">=</span> q<span class="token punctuation">.</span>ne_id AND m<span class="token punctuation">.</span>cited_attached <span class="token operator">=</span> q<span class="token punctuation">.</span>attached AND m<span class="token punctuation">.</span>cited_primary_key <span class="token operator">=</span> q<span class="token punctuation">.</span>primary_key AND m<span class="token punctuation">.</span>cited_objects_type <span class="token operator">=</span> q<span class="token punctuation">.</span>objects_type<span class="token punctuation">)</span> SELECT ne_id<span class="token punctuation">,</span> attached<span class="token punctuation">,</span> primary_key<span class="token punctuation">,</span> objects_type FROM q
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>根据引用关系表，获取数据库配置：
+X<span class="token punctuation">:</span>\ba3\src\basite\config_frame\db2moi<span class="token punctuation">.</span>py
+
+    <span class="token keyword">def</span> <span class="token function">add_object_to_type_dict</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> ne_id<span class="token punctuation">,</span> attached<span class="token punctuation">,</span> primary_key<span class="token punctuation">,</span> obj_type<span class="token punctuation">,</span> dev_ne_id<span class="token punctuation">,</span> objects_dict<span class="token punctuation">,</span> config_type<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment"># TODO: predefine, table name may change</span>
+        <span class="token keyword">if</span> obj_type <span class="token keyword">in</span> tuple_of_predefine<span class="token punctuation">:</span>
+            obj_table <span class="token operator">=</span> <span class="token string">&quot;t_config_%s_all&quot;</span> <span class="token operator">%</span> obj_type
+        <span class="token keyword">else</span><span class="token punctuation">:</span>
+            obj_table <span class="token operator">=</span> <span class="token string">&quot;t_config_%s&quot;</span> <span class="token operator">%</span> obj_type
+        self<span class="token punctuation">.</span>log<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">&quot;obj table [%s] ne_id [%d] attached [%d], pk [%s]&quot;</span><span class="token punctuation">,</span>
+                       obj_table<span class="token punctuation">,</span> ne_id<span class="token punctuation">,</span> attached<span class="token punctuation">,</span> primary_key<span class="token punctuation">)</span>
+
+        <span class="token comment"># we should get real zone name on the device</span>
+        <span class="token keyword">if</span> obj_type <span class="token keyword">in</span> ba_REDEFINED_MOC_TYPE <span class="token keyword">and</span> attached <span class="token operator">==</span> CONFIG_ATTACHED_GRP<span class="token punctuation">:</span>
+            former_key <span class="token operator">=</span> primary_key
+            <span class="token keyword">if</span> obj_type <span class="token operator">==</span> <span class="token string">'obj_zone'</span><span class="token punctuation">:</span>
+                primary_key <span class="token operator">=</span> get_dev_zone_name<span class="token punctuation">(</span>dev_ne_id<span class="token punctuation">,</span> former_key<span class="token punctuation">,</span> self<span class="token punctuation">.</span>db<span class="token punctuation">)</span>
+                attached <span class="token operator">=</span> <span class="token number">1</span>
+                ne_id <span class="token operator">=</span> dev_ne_id
+                obj_table <span class="token operator">=</span> <span class="token string">&quot;t_config_zone&quot;</span>
+                obj_type <span class="token operator">=</span> <span class="token string">'zone'</span>
+
+        obj_value <span class="token operator">=</span> get_one_value_from_db<span class="token punctuation">(</span>self<span class="token punctuation">.</span>db<span class="token punctuation">,</span> obj_table<span class="token punctuation">,</span> ne_id<span class="token punctuation">,</span> attached<span class="token punctuation">,</span> primary_key<span class="token punctuation">,</span> config_type<span class="token operator">=</span>config_type<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> <span class="token keyword">not</span> obj_value<span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>log<span class="token punctuation">.</span>warn<span class="token punctuation">(</span><span class="token string">'no value found for ne_id(%s)_attach(%s)_pk(%s)'</span><span class="token punctuation">,</span> ne_id<span class="token punctuation">,</span> attached<span class="token punctuation">,</span> primary_key<span class="token punctuation">)</span>
+            <span class="token keyword">return</span>
+        conflict <span class="token operator">=</span> change_referenced_primary_key<span class="token punctuation">(</span>obj_value<span class="token punctuation">,</span> dev_ne_id<span class="token punctuation">,</span> attached<span class="token punctuation">,</span>
+                                                 obj_type<span class="token punctuation">,</span> self<span class="token punctuation">.</span>db<span class="token punctuation">,</span> self<span class="token punctuation">.</span>log<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> conflict<span class="token punctuation">:</span>
+            self<span class="token punctuation">.</span>conflict<span class="token punctuation">.</span>append<span class="token punctuation">(</span>conflict<span class="token punctuation">)</span>
+        append_to_child_list<span class="token punctuation">(</span>objects_dict<span class="token punctuation">,</span> obj_type<span class="token punctuation">,</span> <span class="token punctuation">[</span>obj_value<span class="token punctuation">,</span> ne_id<span class="token punctuation">,</span> attached<span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>X<span class="token punctuation">:</span>\ba3\src\basite\config_frame\db_operate<span class="token punctuation">.</span>py
+根据关系表查询的值传参并查询数据库：
+
+<span class="token keyword">def</span> <span class="token function">get_one_value_from_db</span><span class="token punctuation">(</span>db<span class="token punctuation">,</span> tab_name<span class="token punctuation">,</span> ne_id<span class="token punctuation">,</span> attached<span class="token punctuation">,</span> primary_key<span class="token punctuation">,</span> config_type<span class="token operator">=</span>POLICY_SET_KEY<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> config_type <span class="token operator">==</span> ba_TPL_SET<span class="token punctuation">:</span>
+        sql <span class="token operator">=</span> <span class="token string">&quot;SELECT value from &quot;</span> <span class="token operator">+</span> tab_name <span class="token operator">+</span> <span class="token string">&quot; WHERE ne_id='%s' AND attached=%s AND primary_key='%s';&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>ne_id<span class="token punctuation">,</span> attached<span class="token punctuation">,</span> primary_key<span class="token punctuation">)</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        sql <span class="token operator">=</span> <span class="token string">&quot;SELECT value from &quot;</span> <span class="token operator">+</span> tab_name <span class="token operator">+</span> <span class="token string">&quot; WHERE ne_id='%s' AND attached=%s AND primary_key='%s';&quot;</span> <span class="token operator">%</span> <span class="token punctuation">(</span>ne_id<span class="token punctuation">,</span> attached<span class="token punctuation">,</span> primary_key<span class="token punctuation">)</span>
+    db<span class="token punctuation">.</span>logger<span class="token punctuation">.</span>debug<span class="token punctuation">(</span>sql<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> db_get_one_column<span class="token punctuation">(</span>db<span class="token punctuation">,</span> sql<span class="token punctuation">,</span> db_args<span class="token operator">=</span><span class="token punctuation">(</span>ne_id<span class="token punctuation">,</span> attached<span class="token punctuation">,</span> primary_key<span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>X<span class="token punctuation">:</span>\ba3\src\basite\config_frame\db2moi<span class="token punctuation">.</span>py
+排序：
+
+    <span class="token keyword">def</span> <span class="token function">modify_sec_policy_pri</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> data_dict<span class="token punctuation">,</span> parent_dict<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">for</span> moc_type <span class="token keyword">in</span> policy_need_mov_pri<span class="token punctuation">:</span>
+            parent_sec_policy_num <span class="token operator">=</span> <span class="token number">0</span>
+            data_sec_policy_num <span class="token operator">=</span> <span class="token number">0</span>
+            <span class="token keyword">if</span> moc_type <span class="token keyword">in</span> parent_dict<span class="token punctuation">:</span>
+                parent_sec_policy_num <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>parent_dict<span class="token punctuation">[</span>moc_type<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>log<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">&quot;parent sec_policy num [%d]&quot;</span><span class="token punctuation">,</span> parent_sec_policy_num<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> moc_type <span class="token keyword">in</span> data_dict<span class="token punctuation">:</span>
+                data_sec_policy_num <span class="token operator">=</span> <span class="token builtin">len</span><span class="token punctuation">(</span>data_dict<span class="token punctuation">[</span>moc_type<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            self<span class="token punctuation">.</span>log<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">&quot;device sec_policy num [%d]&quot;</span><span class="token punctuation">,</span> data_sec_policy_num<span class="token punctuation">)</span>
+            <span class="token keyword">if</span> moc_type <span class="token operator">==</span> <span class="token string">'dnat_cfg_cp'</span><span class="token punctuation">:</span>
+                pri <span class="token operator">=</span> <span class="token string">'priority'</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                pri <span class="token operator">=</span> <span class="token string">'pri'</span>
+            <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> data_sec_policy_num<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+                data_dict<span class="token punctuation">[</span>moc_type<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>pri<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token builtin">int</span><span class="token punctuation">(</span>data_dict<span class="token punctuation">[</span>moc_type<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span>pri<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">+</span> parent_sec_policy_num
+        <span class="token keyword">return</span>
+
+
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>X<span class="token punctuation">:</span>\ba3\src\basite\config_frame\db2moi<span class="token punctuation">.</span>py
+合并单设备和策略集的配置：
+
+    <span class="token keyword">def</span> <span class="token function">merge_object_dict_by_type</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> base_dict<span class="token punctuation">,</span> add_dict<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        merge two object dict to one,
+        value list of each object_type in add_dict will be added to value list of the same object type in add_dict,
+        value list of each object type in both dict may have the same value, we should remove duplicate one
+        @param base_dict: key = object_type, value = value_list
+        @param add_dict:
+        &quot;&quot;&quot;</span>
+        self<span class="token punctuation">.</span>log<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">&quot;size: base_dict %d, add_dict %d&quot;</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>base_dict<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token builtin">len</span><span class="token punctuation">(</span>add_dict<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">for</span> object_type <span class="token keyword">in</span> add_dict<span class="token punctuation">:</span>
+            <span class="token keyword">if</span> object_type <span class="token keyword">in</span> base_dict<span class="token punctuation">:</span>
+                base_type_list <span class="token operator">=</span> base_dict<span class="token punctuation">[</span>object_type<span class="token punctuation">]</span>
+                base_type_list<span class="token punctuation">.</span>extend<span class="token punctuation">(</span>add_dict<span class="token punctuation">[</span>object_type<span class="token punctuation">]</span><span class="token punctuation">)</span>
+            <span class="token keyword">else</span><span class="token punctuation">:</span>
+                base_dict<span class="token punctuation">[</span>object_type<span class="token punctuation">]</span> <span class="token operator">=</span> add_dict<span class="token punctuation">[</span>object_type<span class="token punctuation">]</span>
+        <span class="token keyword">return</span> base_dict
+
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>X<span class="token punctuation">:</span>\ba3\src\basite\config_frame\utils<span class="token punctuation">.</span>py
+
+<span class="token keyword">def</span> <span class="token function">build_policy_set_data</span><span class="token punctuation">(</span>ne_id<span class="token punctuation">,</span> moi_dict<span class="token punctuation">,</span> config_type<span class="token operator">=</span>POLICY_SET_KEY<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    ne_id = 101
+    moi_dict = {'sec_policy_tpl': {u'celuemuban09': &lt;config_frame.instance.Moi object at 0x7fb4465be2d0&gt;}}
+    config_type = ba_tpl_set
+    &quot;&quot;&quot;</span>
+    set_item <span class="token operator">=</span> <span class="token builtin">dict</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    set_item<span class="token punctuation">[</span><span class="token string">&quot;name&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;auto_created_for_ne#&quot;</span> <span class="token operator">+</span> <span class="token builtin">str</span><span class="token punctuation">(</span>ne_id<span class="token punctuation">)</span>
+    set_item<span class="token punctuation">[</span><span class="token string">&quot;desc&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">&quot;auto-loaded&quot;</span>
+    <span class="token keyword">if</span> config_type <span class="token operator">==</span> POLICY_SET_KEY<span class="token punctuation">:</span>
+        set_item<span class="token punctuation">[</span><span class="token string">&quot;parent&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'any'</span>
+    set_item<span class="token punctuation">[</span><span class="token string">&quot;need_download&quot;</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span>
+
+    policy_set_moc <span class="token operator">=</span> moc_container<span class="token punctuation">.</span>all_mocs<span class="token punctuation">[</span>config_type<span class="token punctuation">]</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    对级联策略模板集schema文件的moc解析
+    policy_set_moc = &lt;config_frame.schema.Moc object at 0x7fb448a6cdd0&gt;
+
+    policy_set_moc.attributes = &lt;config_frame.schema.ComplexAttr object at 0x7fb448a6cfd0&gt;
+
+    policy_set_moc.attributes.sub_attrs = {u'need_download': &lt;config_frame.schema.SimpleAttr object at 0x7fb448a6f0d0&gt;, u'name': &lt;config_frame.schema.SimpleAttr object at 0x7fb448a6f110&gt;, u'parent': &lt;config_frame.schema.SimpleAttr object at 0x7fb448a6f190&gt;, u'sec_policy_tpl_list': &lt;config_frame.schema.ComplexAttr object at 0x7fb448a6f210&gt;, u'device': &lt;config_frame.schema.ComplexAttr object at 0x7fb448a6f310&gt;, u'desc': &lt;config_frame.schema.SimpleAttr object at 0x7fb448a6f490&gt;}
+    &quot;&quot;&quot;</span>
+
+    <span class="token keyword">for</span> attr_name<span class="token punctuation">,</span> attr_obj <span class="token keyword">in</span> policy_set_moc<span class="token punctuation">.</span>attributes<span class="token punctuation">.</span>sub_attrs<span class="token punctuation">.</span>iteritems<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> <span class="token keyword">not</span> attr_obj<span class="token punctuation">.</span>is_reference_type_list_attr<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">continue</span>
+        <span class="token triple-quoted-string string">'''
+        for example, in policy set Moc --&gt; rules section:
+            attr_name = rules
+            attr_name_of_reference_type = rule_name
+            attr_value_of_reference_type = sec_policy
+        '''</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        attr_name = sec_policy_tpl_list
+        attr_obj = &lt;config_frame.schema.ComplexAttr object at 0x7fb448a6f210&gt;
+        attr_obj.sub_attrs = {u'rule_name': &lt;config_frame.schema.SimpleAttr object at 0x7fb448a6f2d0&gt;}
+        attr_obj.sub_attrs.keys() = [u'rule_name']
+
+        &quot;&quot;&quot;</span>
+        attr_name_of_ref_type <span class="token operator">=</span> attr_obj<span class="token punctuation">.</span>sub_attrs<span class="token punctuation">.</span>keys<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        attr_name_of_ref_type = rule_name
+        &quot;&quot;&quot;</span>
+        attr_value_of_ref_type <span class="token operator">=</span> attr_obj<span class="token punctuation">.</span>sub_attrs<span class="token punctuation">[</span>attr_name_of_ref_type<span class="token punctuation">]</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        attr_value_of_ref_type&lt;config_frame.schema.SimpleAttr object at 0x7fb448a6f2d0&gt;
+        &quot;&quot;&quot;</span>
+        reference_type <span class="token operator">=</span> attr_value_of_ref_type<span class="token punctuation">.</span>reference_moc
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        reference_type = sec_policy_tpl
+        &quot;&quot;&quot;</span>
+        set_item<span class="token punctuation">[</span>attr_name<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">if</span> reference_type <span class="token keyword">not</span> <span class="token keyword">in</span> moi_dict<span class="token punctuation">:</span>
+            <span class="token keyword">continue</span>
+        <span class="token keyword">for</span> obj <span class="token keyword">in</span> moi_dict<span class="token punctuation">[</span>reference_type<span class="token punctuation">]</span><span class="token punctuation">.</span>itervalues<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token triple-quoted-string string">&quot;&quot;&quot;
+            obj = 101_3_&lt;sec_policy_tpl&gt;_&lt;celuemuban09&gt;
+            obj.get_primary_key() = celuemuban09
+            &quot;&quot;&quot;</span>
+            set_item<span class="token punctuation">[</span>attr_name<span class="token punctuation">]</span><span class="token punctuation">.</span>append<span class="token punctuation">(</span><span class="token punctuation">{</span>attr_name_of_ref_type<span class="token punctuation">:</span> obj<span class="token punctuation">.</span>get_primary_key<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> set_item
+
+
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>X<span class="token punctuation">:</span>\ba3\src\basite\config_frame\schema<span class="token punctuation">.</span>py
+
+
+<span class="token keyword">class</span> <span class="token class-name">ComplexAttr</span><span class="token punctuation">(</span>BaseAttr<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token builtin">super</span><span class="token punctuation">(</span>ComplexAttr<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>attr_type <span class="token operator">=</span> <span class="token string">&quot;ComplexAttr&quot;</span>
+        self<span class="token punctuation">.</span>is_simple_attr <span class="token operator">=</span> <span class="token boolean">False</span>
+        self<span class="token punctuation">.</span>is_array <span class="token operator">=</span> <span class="token boolean">False</span>
+        self<span class="token punctuation">.</span>sub_attrs <span class="token operator">=</span> <span class="token builtin">dict</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        self<span class="token punctuation">.</span>check_rule <span class="token operator">=</span> <span class="token boolean">None</span>
+
+    <span class="token keyword">def</span> <span class="token function">is_reference_type_list_attr</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        This method is used to generate root Moi automatically.
+        For example:
+            when to create policy set Moi, we parser all attributes of Policy Set Moc,
+            if one attributes is reference type list attribute, we just parser
+            all referenced moi from moi dict and attach them onto policy set moi.
+        &quot;&quot;&quot;</span>
+        <span class="token keyword">if</span> <span class="token builtin">len</span><span class="token punctuation">(</span>self<span class="token punctuation">.</span>sub_attrs<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span> <span class="token keyword">and</span> self<span class="token punctuation">.</span>is_array<span class="token punctuation">:</span>
+            <span class="token comment"># only has single sub attribute</span>
+            <span class="token keyword">if</span> self<span class="token punctuation">.</span>sub_attrs<span class="token punctuation">.</span>values<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>reference_moc<span class="token punctuation">:</span>
+                <span class="token triple-quoted-string string">&quot;&quot;&quot;
+                级联策略模板集schema文件属性：
+
+                self.sub_attrs = {u'rule_name': &lt;config_frame.schema.SimpleAttr object at 0x7fb448a6f2d0&gt;}
+                self.sub_attrs.values() = [&lt;config_frame.schema.SimpleAttr object at 0x7fb448a6f2d0&gt;]
+                self.sub_attrs.values()[0] = &lt;config_frame.schema.SimpleAttr object at 0x7fb448a6f2d0&gt;
+                self.sub_attrs.values()[0].reference_moc = sec_policy_tpl
+                &quot;&quot;&quot;</span>
+                <span class="token keyword">return</span> <span class="token boolean">True</span>
+
+        <span class="token keyword">return</span> <span class="token boolean">False</span>
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>X<span class="token punctuation">:</span>\ba3\src\basite\config_frame\utils<span class="token punctuation">.</span>py
+
+
+<span class="token comment"># data is a list of moi, return a dict of moi with the same moc_type</span>
+<span class="token keyword">def</span> <span class="token function">item_list_to_moi_dict</span><span class="token punctuation">(</span>moc<span class="token punctuation">,</span> data<span class="token punctuation">,</span> ne_id<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span> attach_type<span class="token operator">=</span>CONFIG_ATTACHED_DEV<span class="token punctuation">,</span>
+                          ignore_from<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> log<span class="token operator">=</span>logger<span class="token punctuation">,</span> config_type<span class="token operator">=</span>POLICY_SET_KEY<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token triple-quoted-string string">&quot;&quot;&quot;
+    moc = &lt;config_frame.schema.Moc object at 0x7fb448a6cdd0&gt;
+    moc.name = ba_tpl_set
+    data = [{'need_download': 1, u'sec_policy_tpl_list': [{u'rule_name': u'celuemuban09'}], 'name': 'auto_created_for_ne#101', 'desc': 'auto-loaded'}]
+    ne_id = 101
+    attach_type = 3
+    &quot;&quot;&quot;</span>
+
+    <span class="token keyword">if</span> config_type <span class="token operator">==</span> ba_TPL_SET<span class="token punctuation">:</span>
+        attach_type <span class="token operator">=</span> <span class="token number">3</span>
+
+    moi_dict <span class="token operator">=</span> <span class="token builtin">dict</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    log<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">&quot;moc_type:%s, ne_id: %s, attach_type: %s&quot;</span><span class="token punctuation">,</span> moc<span class="token punctuation">.</span>name<span class="token punctuation">,</span> ne_id<span class="token punctuation">,</span> attach_type<span class="token punctuation">)</span>
+    log<span class="token punctuation">.</span>debug<span class="token punctuation">(</span><span class="token string">'data:\n%s'</span><span class="token punctuation">,</span> data<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> item <span class="token keyword">in</span> data<span class="token punctuation">:</span>
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        item = {'need_download': 1, u'sec_policy_tpl_list': [{u'rule_name': u'celuemuban09'}], 'name': 'auto_created_for_ne#101', 'desc': 'auto-loaded'}
+        &quot;&quot;&quot;</span>
+        one_moi <span class="token operator">=</span> parse_one_moi<span class="token punctuation">(</span>moc<span class="token punctuation">,</span> item<span class="token punctuation">,</span> ne_id<span class="token punctuation">,</span> attach_type<span class="token punctuation">,</span> ignore_from<span class="token operator">=</span>ignore_from<span class="token punctuation">,</span> log<span class="token operator">=</span>log<span class="token punctuation">)</span>
+        primary_key <span class="token operator">=</span> one_moi<span class="token punctuation">.</span>get_primary_key<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        moi_dict<span class="token punctuation">[</span>primary_key<span class="token punctuation">]</span> <span class="token operator">=</span> one_moi
+        <span class="token triple-quoted-string string">&quot;&quot;&quot;
+        one_moi = 101_3_&lt;ba_tpl_set&gt;_&lt;auto_created_for_ne#101&gt;
+        one_moi.attach_type =3
+        primary_key = auto_created_for_ne#101
+        moi_dict = {'auto_created_for_ne#101': &lt;config_frame.instance.Moi object at 0x7fb4465be350&gt;}
+        &quot;&quot;&quot;</span>
+    <span class="token keyword">return</span> moi_dict
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>X<span class="token punctuation">:</span>\ba3\src\basite\config_frame\utils<span class="token punctuation">.</span>py
+写入配置文件，写入的是parse_config_set_to_mois<span class="token punctuation">(</span><span class="token punctuation">)</span>方法返回的值
+
+<span class="token keyword">def</span> <span class="token function">write_moi_dict_into_file</span><span class="token punctuation">(</span>dict_of_moi<span class="token punctuation">,</span> filename<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    dict_of_json_type <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token keyword">for</span> obj_type<span class="token punctuation">,</span> one_type_moi <span class="token keyword">in</span> dict_of_moi<span class="token punctuation">.</span>iteritems<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;开始写入文件------------&quot;</span><span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>obj_type<span class="token punctuation">)</span>
+        <span class="token keyword">print</span><span class="token punctuation">(</span>one_type_moi<span class="token punctuation">)</span>
+ 
+        one_type_value_list <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> pk<span class="token punctuation">,</span> one_moi <span class="token keyword">in</span> one_type_moi<span class="token punctuation">.</span>iteritems<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;写详细配置------------------&quot;</span><span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>pk<span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>one_moi<span class="token punctuation">)</span>
+            _add_config_from_attr<span class="token punctuation">(</span>one_moi<span class="token punctuation">)</span>
+            one_type_value_list<span class="token punctuation">.</span>append<span class="token punctuation">(</span>one_moi<span class="token punctuation">.</span>children_attributes<span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;one_type_value_list--------------------&quot;</span><span class="token punctuation">)</span>
+            <span class="token keyword">print</span><span class="token punctuation">(</span>one_type_value_list<span class="token punctuation">)</span>
+        dict_of_json_type<span class="token punctuation">[</span>obj_type<span class="token punctuation">]</span> <span class="token operator">=</span> one_type_value_list
+
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;dict_of_json_type----------------&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>dict_of_json_type<span class="token punctuation">)</span>
+
+    <span class="token keyword">with</span> <span class="token builtin">open</span><span class="token punctuation">(</span>filename<span class="token punctuation">,</span> <span class="token string">'w+'</span><span class="token punctuation">)</span> <span class="token keyword">as</span> fp<span class="token punctuation">:</span>
+        fp<span class="token punctuation">.</span>writelines<span class="token punctuation">(</span>json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span>dict_of_json_type<span class="token punctuation">,</span> sort_keys<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> indent<span class="token operator">=</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+
+<span class="token triple-quoted-string string">&quot;&quot;&quot;
+开始写入文件------------
+obj_type = ba_tpl_set
+one_type_moi = {'auto_created_for_ne#101': &lt;config_frame.instance.Moi object at 0x7fb4465be350&gt;}
+写详细配置------------------
+pk = auto_created_for_ne#101
+one_moi = 101_3_&lt;ba_tpl_set&gt;_&lt;auto_created_for_ne#101&gt;
+one_type_value_list--------------------
+dict_of_json_type[ba_tpl_set] = [{'need_download': 1, u'sec_policy_tpl_list': [{u'rule_name': u'celuemuban09'}], 'name': 'auto_created_for_ne#101', 'config_from': 'local', 'desc': 'auto-loaded'}]
+
+
+开始写入文件------------
+obj_type = sec_policy_tpl
+one_type_moi = {u'celuemuban09': &lt;config_frame.instance.Moi object at 0x7fb4465be2d0&gt;}
+写详细配置------------------
+pk = celuemuban09
+one_moi = 101_3_&lt;sec_policy_tpl&gt;_&lt;celuemuban09&gt;
+one_type_value_list--------------------
+dict_of_json_type[ba_tpl_set] = [{u'src_addr': [{u'ip': u'5.5.5.5', u'mask': u'', u'addr_type': u'host'}], u'service_item': [{u'text': u'DHCP', u'type': u'predef', u'value': u'DHCP'}], u'tpl_from': u'local', u'action': u'permit', u'desc': u'', u'dst_addr': [{u'ip': u'6.6.6.6', u'mask': u'', u'addr_type': u'host'}], 'config_from': 'local', u'name': u'celuemuban09'}]
+
+
+dict_of_json_type----------------
+dict_of_json_type = {'ba_tpl_set': [{'need_download': 1, u'sec_policy_tpl_list': [{u'rule_name': u'celuemuban09'}], 'name': 'auto_created_for_ne#101', 'config_from': 'local', 'desc': 'auto-loaded'}], 'sec_policy_tpl': [{u'src_addr': [{u'ip': u'5.5.5.5', u'mask': u'', u'addr_type': u'host'}], u'service_item': [{u'text': u'DHCP', u'type': u'predef', u'value': u'DHCP'}], u'tpl_from': u'local', u'action': u'permit', u'desc': u'', u'dst_addr': [{u'ip': u'6.6.6.6', u'mask': u'', u'addr_type': u'host'}], 'config_from': 'local', u'name': u'celuemuban09'}]}
+
+写入文件完毕
+&quot;&quot;&quot;</span>
+
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>X<span class="token punctuation">:</span>\ba3\src\basite\config_frame\utils<span class="token punctuation">.</span>py
+
+<span class="token comment"># used by write_moi_dict_into_file</span>
+<span class="token keyword">def</span> <span class="token function">_add_config_from_attr</span><span class="token punctuation">(</span>moi<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    data <span class="token operator">=</span> get_dict_of_config_from<span class="token punctuation">(</span>moi<span class="token punctuation">.</span><span class="token builtin">type</span><span class="token punctuation">,</span> moi<span class="token punctuation">.</span>children_attributes<span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span><span class="token string">&quot;写入attached值--------------&quot;</span><span class="token punctuation">)</span>
+    <span class="token keyword">print</span><span class="token punctuation">(</span>moi<span class="token punctuation">.</span><span class="token builtin">type</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> moi<span class="token punctuation">.</span>attach_type <span class="token keyword">in</span> <span class="token punctuation">(</span>CONFIG_ATTACHED_GRP<span class="token punctuation">,</span> CONFIG_ATTACHED_SEC_TMPL<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        data<span class="token punctuation">[</span>CONFIG_FROM<span class="token punctuation">]</span> <span class="token operator">=</span> CONFIG_FROM_GRP
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        data<span class="token punctuation">[</span>CONFIG_FROM<span class="token punctuation">]</span> <span class="token operator">=</span> CONFIG_FROM_DEV
+    <span class="token keyword">print</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span>
+
+<span class="token triple-quoted-string string">&quot;&quot;&quot;
+写入attached值--------------
+ba_tpl_set
+{'need_download': 1, u'sec_policy_tpl_list': [{u'rule_name': u'celuemuban09'}], 'name': 'auto_created_for_ne#101', 'config_from': 'ba', 'desc': 'auto-loaded'}
+
+写入attached值--------------
+sec_policy_tpl
+{u'src_addr': [{u'ip': u'5.5.5.5', u'mask': u'', u'addr_type': u'host'}], u'service_item': [{u'text': u'DHCP', u'type': u'predef', u'value': u'DHCP'}], u'tpl_from': u'ba', u'action': u'permit', u'desc': u'', u'dst_addr': [{u'ip': u'6.6.6.6', u'mask': u'', u'addr_type': u'host'}], 'config_from': 'local', u'name': u'celuemuban09'}
+&quot;&quot;&quot;</span>
+</code></pre></div><div class="language-python extra-class"><pre class="language-python"><code>
+<span class="token keyword">def</span> <span class="token function">get_dict_of_config_from</span><span class="token punctuation">(</span>obj_type<span class="token punctuation">,</span> data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> obj_type <span class="token operator">==</span> <span class="token string">'session'</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> data<span class="token punctuation">[</span><span class="token string">'timeout'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    <span class="token keyword">elif</span> obj_type <span class="token operator">==</span> <span class="token string">'av_config'</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> data<span class="token punctuation">[</span><span class="token string">'cachefile'</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+    <span class="token keyword">else</span><span class="token punctuation">:</span>
+        <span class="token keyword">return</span> data
+
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.fcdfc17b.js" defer></script><script src="/assets/js/2.34dcbb0f.js" defer></script><script src="/assets/js/44.e1043a3f.js" defer></script>
+  </body>
+</html>
