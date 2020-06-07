@@ -14,7 +14,7 @@
 
 ### 切换到本地分支
 - git checkout 分支名  
-例如：git checkout dev，这条命令表示从当前master分支切换到dev分支。
+例如：git checkout dev，这条.j命令表示从当前master分支切换到dev分支。
 
 ### 创建本地分支并切换
 - git checkout -b 分支名  

@@ -20,21 +20,19 @@ git clean -d -fx
 ```
 例：
 
-# root @ ba in ~/at/ba3 on git:GSGL/develop o [18:20:36] 
 $ git pull
-reverse mapping checking getaddrinfo for bogon [10.95.135.41] failed - POSSIBLE BREAK-IN ATTEMPT!
+reverse mapping checking getaddrinfo for bogon [127.0.0.1] failed - POSSIBLE BREAK-IN ATTEMPT!
 remote: Enumerating objects: 71, done.
 remote: Counting objects: 100% (71/71), done.
 remote: Compressing objects: 100% (71/71), done.
 remote: Total 71 (delta 12), reused 0 (delta 0)
 Unpacking objects: 100% (71/71), done.
-From git-biz.qianxin-inc.cn:irp/ba/ba3
+From git-biz.github.cn:irp/ba/ba3
    7f5df71..473cb83  GSGL/develop -> origin/GSGL/develop
    df149c5..30ae82f  GSGL/feature/IRP-891 -> origin/GSGL/feature/IRP-891
 Updating 19a4450..473cb83
 error: Untracked working tree file 'src/basite/DEBUG' would be overwritten by merge.  Aborting
 
-# root @ ba in ~/at/ba3 on git:GSGL/develop o [19:03:52] C:1
 $ git clean -d -fx
 Removing build/
 Removing report_generator.log
@@ -62,7 +60,6 @@ Removing src/basite/common/file_value_md5.pyc
 ## 错误二：git bash 不显示中文
 git不能正常显示中文
 ```
-ba@PC01 MINGW64 /e/at/ba-project-docs (develop)
 $ git status
 On branch develop
 Your branch is up to date with 'origin/develop'.
@@ -76,12 +73,10 @@ nothing added to commit but untracked files present (use "git add" to track)
 ```
 修改配置文件：
 ```
-ba@PC01 MINGW64 /e/at/ba-project-docs (develop)
 $ git config --global core.quotepath false
 ```
 再次查看，可以正确显示中文
 ```
-ba@PC01 MINGW64 /e/at/ba-project-docs (develop)
 $ git status
 On branch develop
 Your branch is up to date with 'origin/develop'.
@@ -98,7 +93,7 @@ nothing added to commit but untracked files present (use "git add" to track)
 今天用git pull来更新代码，遇到了下面的问题：
 ```
 $ git pull
-Address 172.24.11.90 maps to bogon, but this does not map back to the address - POSSIBLE BREAK-IN ATTEMPT!
+Address 17.4.11.90 maps to bogon, but this does not map back to the address - POSSIBLE BREAK-IN ATTEMPT!
 Updating 4719bbd..dab69ed
 error: Your local changes to 'src/basite/device/ipsec/ipsec_auto_tunnel.py' would be overwritten by merge.  Aborting.
 Please, commit your changes or stash them before you can merge.
@@ -121,13 +116,11 @@ git stash clear: 清空Git栈。此时使用gitg等图形化工具会发现，�
 
 
 ```
-# root @ ba in ~/at/ba3 on git:GSGL/develop o [17:57:59] C:1
 $ git stash
 Saved working directory and index state WIP on GSGL/develop: 4719bbd fix bug IRP-1083 无法添加或编辑IPsec隧道数据
 HEAD is now at 4719bbd fix bug IRP-1083 无法添加或编辑IPsec隧道数据
 ```
 ```
-# root @ ba in ~/at/ba3 on git:GSGL/develop o [18:02:56] 
 $ git pull
 reverse mapping checking getaddrinfo for bogon [172.24.11.90] failed - POSSIBLE BREAK-IN ATTEMPT!
 Updating 4719bbd..dab69ed
@@ -140,7 +133,6 @@ Fast-forward
  5 files changed, 46 insertions(+), 1 deletions(-)
 ```
 ```
-# root @ ba in ~/at/ba3 on git:GSGL/develop o [18:03:33] 
 $ git stash pop
 Auto-merging src/basite/device/ipsec/ipsec_auto_tunnel.py
 # On branch GSGL/develop
@@ -160,62 +152,3 @@ Dropped refs/stash@{0} (a9cf993734b7c36631f954a6119fc5f9634aefb6)
 git reset --hard
 git pull
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
