@@ -87,42 +87,11 @@ function getRootSidebar() {
             ]
         },
         {
-            title: "Docker", //侧边栏名称
+            title: "Leetcode", //侧边栏名称
             collapsable: true, //可折叠
             sidebarDepth: 3,
             children: [
-                ['/docker/安装docker', "安装docker"], // 你的md文件地址, 页面显示的HTML名称
-                ['/docker/docker相关的小技巧', "docker相关的小技巧"],
-            ]
-        },
-        {
-            title: "Git和SVN", //侧边栏名称
-            collapsable: true, //可折叠
-            sidebarDepth: 3,
-            children: [
-                ['/git-svn/git_common_commands', "Git常用命令"], // 你的md文件地址, 页面显示的HTML名称
-                ['/git-svn/git_checkout_branch', "git创建分支并关联远程分支"],
-                ['/git-svn/github_always_need_password', "解决向github提交代码总是要输入用户名密码"],
-                ['/git-svn/git_error_info_solutions', "git错误信息解决方法"],
-            ]
-        },
-        {
-            title: "Markdown", //侧边栏名称
-            collapsable: true, //可折叠
-            sidebarDepth: 3,
-            children: [
-                ['/markdown/markdown小语法', "markdown小语法"],  // 你的md文件地址, 页面显示的HTML名称
-                ['/markdown/markdown插入表格语法', "markdown插入表格语法"],
-            ]
-        },
-        {
-            title: "K-line index knowledge", //侧边栏名称
-            collapsable: true, //可折叠
-            sidebarDepth: 3,
-            children: [
-                ['/K-line index knowledge/MACD', "MACD"],  // 你的md文件地址, 页面显示的HTML名称
-                ['/K-line index knowledge/SKDJ', "SKDJ"],
-                ['/K-line index knowledge/图说', "图说"],
+                ['/leetcode/20200606 无重复字符的最长子串', "20200606 无重复字符的最长子串"], // 你的md文件地址, 页面显示的HTML名称
             ]
         },
         {
@@ -133,6 +102,12 @@ function getRootSidebar() {
                 ['/tools/Pycharm快捷键', "Pycharm快捷键"],  // 你的md文件地址, 页面显示的HTML名称
                 ['/tools/samba协议过期', "此共享需要过时的SMB1协议，而此协议是不安全的"],
                 ['/tools/centos锁定文件失败导致打不开虚拟机', "centos锁定文件失败导致打不开虚拟机"],
+                ['/tools/git_common_commands', "Git常用命令"],
+                ['/tools/git_checkout_branch', "git创建分支并关联远程分支"],
+                ['/tools/github_always_need_password', "解决向github提交代码总是要输入用户名密码"],
+                ['/tools/git_error_info_solutions', "git错误信息解决方法"],
+                ['/tools/markdown小语法', "markdown小语法"], 
+                ['/tools/markdown插入表格语法', "markdown插入表格语法"],
                 //['/tools/01 获取配置并写入文件', "获取配置并写入文件"],
                 //['/tools/02 devmd与bad', "devmd与bad"],
             ]
@@ -151,8 +126,6 @@ function getRootSidebar() {
             sidebarDepth: 3,
             children: [
                 ['/extra/messages', "messages"],  // 你的md文件地址, 页面显示的HTML名称
-                // ['/extra/housing_loan', "Housing loan"],
-                // ['/extra/house_decoration', "House decoration"],
             ]
         }
     ]
