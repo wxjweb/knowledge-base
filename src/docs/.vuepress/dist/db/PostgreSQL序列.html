@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>PostgreSQL 序列（SEQUENCE） | 知识库</title>
+    <meta name="generator" content="VuePress 1.5.0">
+    
+    <meta name="description" content="知识库">
+    <link rel="preload" href="/assets/css/0.styles.fda5222c.css" as="style"><link rel="preload" href="/assets/js/app.d2153a58.js" as="script"><link rel="preload" href="/assets/js/2.f0460cba.js" as="script"><link rel="preload" href="/assets/js/12.6bbcd3cf.js" as="script"><link rel="prefetch" href="/assets/js/10.69f86308.js"><link rel="prefetch" href="/assets/js/11.c19cff97.js"><link rel="prefetch" href="/assets/js/13.062b5025.js"><link rel="prefetch" href="/assets/js/14.ba8c468c.js"><link rel="prefetch" href="/assets/js/15.27a25f21.js"><link rel="prefetch" href="/assets/js/16.5f5416f2.js"><link rel="prefetch" href="/assets/js/17.16dde1b0.js"><link rel="prefetch" href="/assets/js/18.844f2031.js"><link rel="prefetch" href="/assets/js/19.d79810a2.js"><link rel="prefetch" href="/assets/js/20.9d308145.js"><link rel="prefetch" href="/assets/js/21.be4987e0.js"><link rel="prefetch" href="/assets/js/22.f9190ad3.js"><link rel="prefetch" href="/assets/js/23.e3e85bce.js"><link rel="prefetch" href="/assets/js/24.45f4fe84.js"><link rel="prefetch" href="/assets/js/25.23a61867.js"><link rel="prefetch" href="/assets/js/26.93033efc.js"><link rel="prefetch" href="/assets/js/27.626f6b7a.js"><link rel="prefetch" href="/assets/js/28.da3ee322.js"><link rel="prefetch" href="/assets/js/29.1bb4f92b.js"><link rel="prefetch" href="/assets/js/3.e0082f21.js"><link rel="prefetch" href="/assets/js/30.7c1f5670.js"><link rel="prefetch" href="/assets/js/31.cac13ca2.js"><link rel="prefetch" href="/assets/js/32.4e80a29c.js"><link rel="prefetch" href="/assets/js/33.861fb333.js"><link rel="prefetch" href="/assets/js/34.6ddb59bd.js"><link rel="prefetch" href="/assets/js/35.48ac4a67.js"><link rel="prefetch" href="/assets/js/36.abe42e8e.js"><link rel="prefetch" href="/assets/js/37.17b0f147.js"><link rel="prefetch" href="/assets/js/38.7c542118.js"><link rel="prefetch" href="/assets/js/39.b477e6a4.js"><link rel="prefetch" href="/assets/js/4.49417740.js"><link rel="prefetch" href="/assets/js/40.651a1127.js"><link rel="prefetch" href="/assets/js/41.a05a7492.js"><link rel="prefetch" href="/assets/js/42.de855ada.js"><link rel="prefetch" href="/assets/js/43.528a9853.js"><link rel="prefetch" href="/assets/js/44.0c78865e.js"><link rel="prefetch" href="/assets/js/45.ff37ebb2.js"><link rel="prefetch" href="/assets/js/5.2004da03.js"><link rel="prefetch" href="/assets/js/6.529fa2f9.js"><link rel="prefetch" href="/assets/js/7.73a02948.js"><link rel="prefetch" href="/assets/js/8.9cecee70.js"><link rel="prefetch" href="/assets/js/9.3c9f4cbf.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.fda5222c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">知识库</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/python/" class="nav-link">
+  python
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="其他" class="dropdown-title"><span class="title">其他</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/talk.html" class="nav-link">
+  talk
+</a></li><li class="dropdown-item"><!----> <a href="/other/" class="nav-link">
+  other
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/wxjweb" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  FAQ
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/python/" class="nav-link">
+  python
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="其他" class="dropdown-title"><span class="title">其他</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/talk.html" class="nav-link">
+  talk
+</a></li><li class="dropdown-item"><!----> <a href="/other/" class="nav-link">
+  other
+</a></li></ul></div></div><div class="nav-item"><a href="https://github.com/wxjweb" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  FAQ
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>welcome</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Python</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Frame</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Linux</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>DB</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/db/PostgreSQL序列.html" class="active sidebar-link">PostgreSQL序列(SEQUENCE)</a></li><li><a href="/db/PostgreSQL按照自定义字段值顺序排序.html" class="sidebar-link">PostgreSQL按照自定义(字段值)顺序排序</a></li><li><a href="/db/PostgreSQL upsert功能insert on conflict do的用法.html" class="sidebar-link">PostgreSQL upsert功能(insert on conflict do)的用法</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Leetcode</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Tools</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Other</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="postgresql-序列（sequence）"><a href="#postgresql-序列（sequence）" class="header-anchor">#</a> PostgreSQL 序列（SEQUENCE）</h1> <p>一、简介</p> <p>序列对象（也叫序列生成器）就是用CREATE SEQUENCE 创建的特殊的单行表。一个序列对象通常用于为行或者表生成唯一的标识符。</p> <p>二、创建序列</p> <p>方法一：直接在表中指定字段类型为serial 类型</p> <div class="language- extra-class"><pre class="language-text"><code>david=# create table tbl_xulie (
+david(# id serial,
+david(# name text);
+NOTICE:  CREATE TABLE will create implicit sequence &quot;tbl_xulie_id_seq&quot; for serial column &quot;tbl_xulie.id&quot;
+CREATE TABLE
+david=#
+</code></pre></div><p>方法二：先创建序列名称，然后在新建的表中列属性指定序列就可以了，该列需int 类型</p> <p>创建序列的语法：</p> <div class="language- extra-class"><pre class="language-text"><code>
+CREATE [ TEMPORARY | TEMP ] SEQUENCE name [ INCREMENT [ BY ] increment ]
+    [ MINVALUE minvalue | NO MINVALUE ] [ MAXVALUE maxvalue | NO MAXVALUE ]
+    [ START [ WITH ] start ] [ CACHE cache ] [ [ NO ] CYCLE ]
+    [ OWNED BY { table.column | NONE } ]
+
+
+</code></pre></div><p>实例：</p> <div class="language- extra-class"><pre class="language-text"><code>david=# create sequence tbl_xulie2_id_seq increment by 1 minvalue 1 no maxvalue start with 1;     
+CREATE SEQUENCE
+david=#
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>david=# create table tbl_xulie2 (
+david(# id int4 not null default nextval('tbl_xulie2_id_seq'),
+david(# name text);
+CREATE TABLE
+david=# 
+</code></pre></div><p>三、查看序列</p> <div class="language- extra-class"><pre class="language-text"><code>david=# \d tbl_xulie
+                         Table &quot;public.tbl_xulie&quot;
+ Column |  Type   |                       Modifiers                        
+--------+---------+--------------------------------------------------------
+ id     | integer | not null default nextval('tbl_xulie_id_seq'::regclass)
+ name   | text    | 
+
+david=# \d tbl_xulie2
+                         Table &quot;public.tbl_xulie2&quot;
+ Column |  Type   |                        Modifiers                        
+--------+---------+---------------------------------------------------------
+ id     | integer | not null default nextval('tbl_xulie2_id_seq'::regclass)
+ name   | text    | 
+
+david=#
+</code></pre></div><p>查看序列属性</p> <div class="language- extra-class"><pre class="language-text"><code>复制代码
+
+david=# \d tbl_xulie_id_seq
+      Sequence &quot;public.tbl_xulie_id_seq&quot;
+    Column     |  Type   |        Value        
+---------------+---------+---------------------
+ sequence_name | name    | tbl_xulie_id_seq
+ last_value    | bigint  | 1
+ start_value   | bigint  | 1
+ increment_by  | bigint  | 1
+ max_value     | bigint  | 9223372036854775807
+ min_value     | bigint  | 1
+ cache_value   | bigint  | 1
+ log_cnt       | bigint  | 0
+ is_cycled     | boolean | f
+ is_called     | boolean | f
+Owned by: public.tbl_xulie.id
+
+david=#
+</code></pre></div><div class="language- extra-class"><pre class="language-text"><code>david=# select * from tbl_xulie2_id_seq;
+   sequence_name   | last_value | start_value | increment_by |      max_value      | min_value | cache_value | log_cnt | is_cycled | is_called 
+-------------------+------------+-------------+--------------+---------------------+-----------+-------------+---------+-----------+-----------
+ tbl_xulie2_id_seq |          1 |           1 |            1 | 9223372036854775807 |         1 |           1 |       0 | f         | f
+(1 row)
+
+david=# 
+</code></pre></div><p>四、序列应用</p> <p>4.1 在INSERT 命令中使用序列</p> <div class="language- extra-class"><pre class="language-text"><code>david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'David');      
+INSERT 0 1
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'Sandy');
+INSERT 0 1
+david=# select * from tbl_xulie;
+ id | name  
+----+-------
+  1 | David
+  2 | Sandy
+(2 rows)
+
+david=# 
+</code></pre></div><p>4.2 数据迁移后更新序列</p> <div class="language- extra-class"><pre class="language-text"><code>david=# truncate tbl_xulie;
+TRUNCATE TABLE
+david=# 
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'Sandy');
+INSERT 0 1
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'David');
+INSERT 0 1
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'Eagle');
+INSERT 0 1
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'Miles');
+INSERT 0 1
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'Simon');
+INSERT 0 1
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'Rock'); 
+INSERT 0 1
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'Peter');
+INSERT 0 1
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'Sally');
+INSERT 0 1
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'Nicole');
+INSERT 0 1
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'Monica');
+INSERT 0 1
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'Renee'); 
+INSERT 0 1
+david=# select * from tbl_xulie;
+ id |  name  
+----+--------
+ 15 | Sandy
+ 16 | David
+ 17 | Eagle
+ 18 | Miles
+ 19 | Simon
+ 20 | Rock
+ 21 | Peter
+ 22 | Sally
+ 23 | Nicole
+ 24 | Monica
+ 25 | Renee
+(11 rows)
+
+david=# copy tbl_xulie to '/tmp/tbl_xulie.sql';
+COPY 11
+david=# truncate tbl_xulie;
+TRUNCATE TABLE
+david=# alter sequence tbl_xulie_id_seq restart with 100;
+ALTER SEQUENCE
+david=# select currval('tbl_xulie_id_seq');
+ currval 
+---------
+      25
+(1 row)
+
+david=# select nextval('tbl_xulie_id_seq');
+ nextval 
+---------
+     100
+(1 row)
+
+david=# select nextval('tbl_xulie_id_seq');
+ nextval 
+---------
+     101
+(1 row)
+
+david=# begin;
+BEGIN
+david=# copy tbl_xulie from '/tmp/tbl_xulie.sql';
+COPY 11
+david=# select setval('tbl_xulie_id_seq', max(id)) from tbl_xulie;
+ setval 
+--------
+     25
+(1 row)
+
+david=# end;
+COMMIT
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'Flash');
+INSERT 0 1
+david=# select * from tbl_xulie;
+ id |  name  
+----+--------
+ 15 | Sandy
+ 16 | David
+ 17 | Eagle
+ 18 | Miles
+ 19 | Simon
+ 20 | Rock
+ 21 | Peter
+ 22 | Sally
+ 23 | Nicole
+ 24 | Monica
+ 25 | Renee
+ 26 | Flash
+(12 rows)
+
+david=# select nextval('tbl_xulie_id_seq');
+ nextval 
+---------
+      27
+(1 row)
+
+david=#
+</code></pre></div><p>五、序列函数</p> <p>下面序列函数，为我们从序列对象中获取最新的序列值提供了简单和并发读取安全的方法。</p> <p><img src="https://note.youdao.com/yws/public/resource/2a20757ad59ce9e71b04a45b83d5d74a/xmlnote/F3C08D7FBF384DB7B30D40E8F790EAA9/9444" alt="image"></p> <p>5.1 查看下一个序列值</p> <div class="language- extra-class"><pre class="language-text"><code>david=# select nextval('tbl_xulie_id_seq');
+ nextval 
+---------
+       3
+(1 row)
+
+david=# select nextval('tbl_xulie_id_seq');
+ nextval 
+---------
+       4
+(1 row)
+
+david=# 
+</code></pre></div><p>5.2 查看序列最近使用值</p> <div class="language- extra-class"><pre class="language-text"><code>david=# select nextval('tbl_xulie_id_seq');
+ nextval 
+---------
+       4
+(1 row)
+
+david=# select currval('tbl_xulie_id_seq');
+ currval 
+---------
+       4
+(1 row)
+
+david=# select currval('tbl_xulie_id_seq');
+ currval 
+---------
+       4
+(1 row)
+
+david=# 
+</code></pre></div><p>5.3 重置序列</p> <p>方法一：使用序列函数</p> <p>a. setval(regclass, bigint)</p> <div class="language- extra-class"><pre class="language-text"><code>david=# truncate tbl_xulie;
+TRUNCATE TABLE
+david=# select setval('tbl_xulie_id_seq', 1);
+ setval 
+--------
+      1
+(1 row)
+
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'Sandy');                  
+INSERT 0 1
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'David');     
+INSERT 0 1
+david=# select * from tbl_xulie;
+ id | name  
+----+-------
+  2 | Sandy
+  3 | David
+(2 rows)
+
+david=# select currval('tbl_xulie_id_seq');
+ currval 
+---------
+       3
+(1 row)
+
+david=# select nextval('tbl_xulie_id_seq');
+ nextval 
+---------
+       4
+(1 row)
+
+david=# 
+</code></pre></div><p>b. setval(regclass, bigint, boolean)</p> <p>b.1 setval(regclass, bigint, true)</p> <div class="language- extra-class"><pre class="language-text"><code>david=# truncate tbl_xulie;
+TRUNCATE TABLE
+david=# select setval('tbl_xulie_id_seq', 1, true);
+ setval 
+--------
+      1
+(1 row)
+
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'Sandy');
+INSERT 0 1
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'David');
+INSERT 0 1
+david=# select * from tbl_xulie;
+ id | name  
+----+-------
+  2 | Sandy
+  3 | David
+(2 rows)
+
+david=#
+</code></pre></div><p>效果同a. setval(regclass, bigint)</p> <p>b.2 setval(regclass, bigint, false)</p> <div class="language- extra-class"><pre class="language-text"><code>david=# truncate tbl_xulie;
+TRUNCATE TABLE
+david=# select setval('tbl_xulie_id_seq', 1, false);
+ setval 
+--------
+      1
+(1 row)
+
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'Sandy');
+INSERT 0 1
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'David');
+INSERT 0 1
+david=# select * from tbl_xulie;
+ id | name  
+----+-------
+  1 | Sandy
+  2 | David
+(2 rows)
+
+david=# 
+
+复制代码
+</code></pre></div><p>方法二：修改序列</p> <p>修改序列的语法：</p> <div class="language- extra-class"><pre class="language-text"><code>ALTER SEQUENCE name [ INCREMENT [ BY ] increment ]
+    [ MINVALUE minvalue | NO MINVALUE ] [ MAXVALUE maxvalue | NO MAXVALUE ]
+    [ START [ WITH ] start ]
+    [ RESTART [ [ WITH ] restart ] ]
+    [ CACHE cache ] [ [ NO ] CYCLE ]
+    [ OWNED BY { table.column | NONE } ]
+ALTER SEQUENCE name OWNER TO new_owner
+ALTER SEQUENCE name RENAME TO new_name
+ALTER SEQUENCE name SET SCHEMA new_schema
+</code></pre></div><p>实例：</p> <div class="language- extra-class"><pre class="language-text"><code>david=# truncate tbl_xulie;
+TRUNCATE TABLE
+david=# alter sequence tbl_xulie_id_seq restart with 0;
+ERROR:  RESTART value (0) cannot be less than MINVALUE (1)
+david=# alter sequence tbl_xulie_id_seq restart with 1;
+ALTER SEQUENCE
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'David');
+INSERT 0 1
+david=# insert into tbl_xulie values (nextval('tbl_xulie_id_seq'), 'Sandy');
+INSERT 0 1
+david=# select * from tbl_xulie;
+ id | name  
+----+-------
+  1 | David
+  2 | Sandy
+(2 rows)
+
+david=# select nextval('tbl_xulie_id_seq');
+ nextval 
+---------
+       3
+(1 row)
+
+david=# 
+</code></pre></div><p>六、删除序列</p> <p>语法：</p> <div class="language- extra-class"><pre class="language-text"><code>DROP SEQUENCE [ IF EXISTS ] name [, ...] [ CASCADE | RESTRICT ]
+</code></pre></div><p>当有表字段使用到PG序列时，不能直接删除。</p> <div class="language- extra-class"><pre class="language-text"><code>david=# drop sequence tbl_xulie2_id_seq;
+ERROR:  cannot drop sequence tbl_xulie2_id_seq because other objects depend on it
+DETAIL:  default for table tbl_xulie2 column id depends on sequence tbl_xulie2_id_seq
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+david=# drop table tbl_xulie2;
+DROP TABLE
+david=# drop sequence tbl_xulie2_id_seq;
+DROP SEQUENCE
+david=# 
+</code></pre></div><p>说明：对于序列是由建表时指定serial 创建的，删除该表的同时，对应的序列也会被删除。</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/linux/shell sed.html" class="prev">
+        shell sed
+      </a></span> <span class="next"><a href="/db/PostgreSQL按照自定义字段值顺序排序.html">
+        PostgreSQL按照自定义(字段值)顺序排序
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.d2153a58.js" defer></script><script src="/assets/js/2.f0460cba.js" defer></script><script src="/assets/js/12.6bbcd3cf.js" defer></script>
+  </body>
+</html>
