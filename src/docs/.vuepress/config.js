@@ -58,12 +58,12 @@ function getRootSidebar() {
             ]
         },
         {
-            title: "Django", //侧边栏名称
+            title: "Frame", //侧边栏名称
             collapsable: true, //可折叠
             sidebarDepth: 3,
             children: [
-                ['/django/django rest framework', "DRF首页"], // 你的md文件地址, 页面显示的HTML名称
-                ['/django/RESTful 架构基础', "RESTful 架构基础"],
+                ['/frame/django rest framework', "DRF首页"], // 你的md文件地址, 页面显示的HTML名称
+                ['/frame/RESTful 架构基础', "RESTful 架构基础"],
             ]
         },
         {
@@ -75,15 +75,18 @@ function getRootSidebar() {
                 ['/linux/cat', "cat命令"],
                 ['/linux/Linux中find命令用法汇总', "Linux中find命令用法汇总"],
                 ['/linux/linux 系统监控、诊断工具之 top 详解', "linux 系统监控、诊断工具之 top 详解"],
+                ['/linux/shell $ 变量和命令行参数', "shell $ 命令和命令行参数"],
+                ['/linux/shell sed', "shell sed"],
             ]
         },
         {
-            title: "Shell", //侧边栏名称
+            title: "db", //侧边栏名称
             collapsable: true, //可折叠
             sidebarDepth: 3,
             children: [
-                ['/shell/shell $ 变量和命令行参数', "shell $ 命令和命令行参数"], // 你的md文件地址, 页面显示的HTML名称
-                ['/shell/shell sed', "shell sed"],
+                ['/db/PostgreSQL序列', "PostgreSQL序列(SEQUENCE)"], // 你的md文件地址, 页面显示的HTML名称
+                ['/db/PostgreSQL按照自定义字段值顺序排序', "PostgreSQL按照自定义(字段值)顺序排序"],
+                ['/db/PostgreSQL upsert功能insert on conflict do的用法', "PostgreSQL upsert功能(insert on conflict do)的用法"],
             ]
         },
         {
@@ -110,14 +113,6 @@ function getRootSidebar() {
                 ['/tools/markdown插入表格语法', "markdown插入表格语法"],
                 //['/tools/01 获取配置并写入文件', "获取配置并写入文件"],
                 //['/tools/02 devmd与bad', "devmd与bad"],
-            ]
-        },
-        {
-            title: "talk", //侧边栏名称
-            collapsable: true, //可折叠
-            sidebarDepth: 3,
-            children: [
-                ['/talk', "talk"],  // 你的md文件地址, 页面显示的HTML名称
             ]
         },
         {
