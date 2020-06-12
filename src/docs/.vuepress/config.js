@@ -54,6 +54,7 @@ function getRootSidebar() {
                 ['/python/python_list', "python 列表(list)"], 
                 ['/python/python_dict', "python 字典(dict)"],
                 ['/python/python_set', "python 集合(set)"],
+                ['/python/通过python调用top命令', "通过python调用top命令"],
                 ['/python/新冠疫情数据爬取', "新冠疫情数据爬取"],
             ]
         },
@@ -75,6 +76,7 @@ function getRootSidebar() {
                 ['/linux/cat', "cat命令"],
                 ['/linux/Linux中find命令用法汇总', "Linux中find命令用法汇总"],
                 ['/linux/linux 系统监控、诊断工具之 top 详解', "linux 系统监控、诊断工具之 top 详解"],
+                ['/linux/Linux中Python应用CPU占用高问题排查', "Linux中Python应用CPU占用高问题排查"],
                 ['/linux/shell $ 变量和命令行参数', "shell $ 命令和命令行参数"],
                 ['/linux/shell sed', "shell sed"],
             ]
