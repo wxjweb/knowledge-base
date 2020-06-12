@@ -17,7 +17,7 @@ module.exports = {
                     },
                     {
                         text: 'other',
-                        link: "/extra/"
+                        link: "/other/"
                     }
                 ]
             },
@@ -82,7 +82,7 @@ function getRootSidebar() {
             ]
         },
         {
-            title: "db", //侧边栏名称
+            title: "DB", //侧边栏名称
             collapsable: true, //可折叠
             sidebarDepth: 3,
             children: [
@@ -118,11 +118,11 @@ function getRootSidebar() {
             ]
         },
         {
-            title: "other", //侧边栏名称
+            title: "Other", //侧边栏名称
             collapsable: true, //可折叠
             sidebarDepth: 3,
             children: [
-                ['/extra/messages', "messages"],  // 你的md文件地址, 页面显示的HTML名称
+                ['/Other/messages', "messages"],  // 你的md文件地址, 页面显示的HTML名称
             ]
         }
     ]
